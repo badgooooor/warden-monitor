@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AddressInput } from './components/AddressInput';
 import { StakingComponent } from './components/StakingComponent';
+import { StakingLoading } from './components/StakingLoading';
 import { HeadingContainer, PageContainer } from './core/Wrapper';
 import { useWardenStaking } from './hooks/useWardenStaking';
 import { Staking } from './types';
@@ -22,6 +23,10 @@ function App() {
         wardenStaking.map((staking: Staking) => (
           <StakingComponent staking={staking} />
         ))
+      }
+      {
+        (address !== "" && wardenStaking.length === 0) &&
+        <StakingLoading address={address} />
       }
     </PageContainer>
   );
