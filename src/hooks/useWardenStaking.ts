@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { masterchef } from "../instances/initMasterchef";
 import { Staking } from "../types";
 import { isValidAddress } from "../utils";
@@ -17,7 +17,11 @@ export const useWardenStaking = (address: string) => {
       }
     };
 
-    fetchStaking();
+    const intervalId = setInterval(async () => {
+      await fetchStaking();
+    }, 15000);
+
+    return () => clearInterval(intervalId);
   }, [address]);
 
   return staking;
