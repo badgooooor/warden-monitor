@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { AddressInput } from './components/AddressInput';
+import { StakingComponent } from './components/StakingComponent';
 import { useWardenStaking } from './hooks/useWardenStaking';
+import { Staking } from './types';
 
 function App() {
   const [address, setAddress] = useState("");
@@ -13,6 +15,11 @@ function App() {
       <AddressInput
         handleSubmit={(_address) => setAddress(_address)}
       />
+      {
+        wardenStaking.map((staking: Staking) => (
+          <StakingComponent staking={staking} />
+        ))
+      }
     </div>
   );
 }
