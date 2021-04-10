@@ -86,7 +86,7 @@ export class Masterchef {
       (staking) => staking.tokenBalance > 0
     );
 
-    const position: Staking[] = await Promise.all(
+    const positions: Staking[] = await Promise.all(
       stakingBalance.map(async (staking) => {
         const reward = await this.getStakingReward(staking, address);
         const rewardPrice = await this.helper.getRewardPrice(staking);
@@ -106,7 +106,8 @@ export class Masterchef {
       })
     );
 
-    return position;
+    console.log("Getting staking positions : ", positions);
+    return positions;
   }
 
   async getStakingBalance(poolInfo: PoolInfo, address: string) {

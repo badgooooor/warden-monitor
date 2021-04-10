@@ -1,11 +1,18 @@
-import React from 'react';
-import { masterchef } from './instances/initMasterchef';
+import React, { useState } from 'react';
+import { AddressInput } from './components/AddressInput';
+import { useWardenStaking } from './hooks/useWardenStaking';
 
 function App() {
-  console.log(masterchef.getPoolInfos())
+  const [address, setAddress] = useState("");
+  const wardenStaking = useWardenStaking(address);
+  console.log(address, wardenStaking);
 
   return (
     <div>
+      <h1>Warden Profiler</h1>
+      <AddressInput
+        handleSubmit={(_address) => setAddress(_address)}
+      />
     </div>
   );
 }
